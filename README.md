@@ -1,2 +1,4 @@
-# Unity-Packages
-Este repositorio va a tener todos los packages que vaya creando para crear mis juegos
+# Sistema de tradeo
+---
+
+Este sistema intenta implementar una forma en la que se pueda interactuar con otro jugador (ya sea persona o npc) en el cual se pueda obtener un beneficio para ambos en el intercambio.

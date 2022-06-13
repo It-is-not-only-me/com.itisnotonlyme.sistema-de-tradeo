@@ -1,12 +1,12 @@
 {
-    "name": "com.itisnotonlyme.nombre",
+    "name": "com.itisnotonlyme.sistema-de-tradeo",
     "version": "1.0.0",
-    "displayName": "Nombre Lindo",
-    "description": "Descripcion linda",
+    "displayName": "Sistema de tradeo",
+    "description": "Permite tener un sistema para tradear donde la intencion es tener un intercambio que beneficie los dos",
     "unity": "2020.3",
     "keywords": [
-      "Key", 
-      "Words"
+      "Tradeo", 
+      "Beneficios"
     ],
     "author": {
       "name": "Juan Ignacio Biancuzzo",
