@@ -83,4 +83,33 @@ public class TradeoTest
 
         Assert.IsTrue(mesa.PermiteEjecutarIntercambio());
     }
+
+    [Test]
+    public void Test06MesaAlEjecutarElIntercambioLasPersonasTienenLoPrometido()
+    {
+        IMesa mesa = new Mesa();
+
+        PersonaPrueba personaBasica1 = new PersonaPrueba(1);
+        PersonaPrueba personaBasica2 = new PersonaPrueba(1);
+
+        IZona zona1 = new Zona(personaBasica1);
+        IZona zona2 = new Zona(personaBasica2);
+
+        int prometidoAPersona1 = 2, prometidoAPersona2 = 4;
+
+        zona1.AgregarPromesa(_promesaSimple);
+        zona1.AgregarPromesa(_promesaSimple);
+        zona2.AgregarPromesa(_promesaSimple);
+
+        zona2.ZonaPropuesta(zona1);
+        zona1.ZonaPropuesta(zona2);
+
+        mesa.AgregarZona(zona1);
+        mesa.AgregarZona(zona2);
+
+        mesa.Intercambiar();
+
+        Assert.AreEqual(prometidoAPersona1, personaBasica1.InteresAcumulado());
+        Assert.AreEqual(prometidoAPersona2, personaBasica2.InteresAcumulado());
+    }
 }

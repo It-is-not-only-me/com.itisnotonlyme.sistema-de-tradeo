@@ -20,7 +20,12 @@ namespace ItIsNotOnlyMe.SistemaDeTradeo
         {
             if (_zonas.Count == 0)
                 return false;
-            return _zonas.TrueForAll(zona => zona.CriterioEvaluacion());   
+            return _zonas.TrueForAll(zona => zona.CriterioEvaluacion());
+        }
+
+        public void Intercambiar()
+        {
+            _zonas.ForEach(zona => zona.Intercambiar());
         }
     }
 }

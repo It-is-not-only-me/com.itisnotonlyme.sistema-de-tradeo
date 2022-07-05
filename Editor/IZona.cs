@@ -9,5 +9,9 @@
         public bool CriterioEvaluacion();
 
         public bool CriterioEvaluacion(IPersona evaluador);
+
+        public void Intercambiar();
+
+        public void Intercambiar(IPersona persona);
     }
 }

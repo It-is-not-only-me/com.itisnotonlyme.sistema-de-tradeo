@@ -31,6 +31,16 @@ namespace ItIsNotOnlyMe.SistemaDeTradeo
             return evaluador.CriterioEvaluacion(_promesas);
         }
 
+        public void Intercambiar()
+        {
+            _zona.Intercambiar(_persona);
+        }
+
+        public void Intercambiar(IPersona persona)
+        {
+            persona.Recibir(_promesas);
+        }
+
         public void ZonaPropuesta(IZona zona)
         {
             _zona = zona;
