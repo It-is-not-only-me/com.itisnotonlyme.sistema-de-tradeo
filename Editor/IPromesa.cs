@@ -2,6 +2,6 @@
 {
     public interface IPromesa
     {
-
+        public IObjeto Exigir();
     }
 }

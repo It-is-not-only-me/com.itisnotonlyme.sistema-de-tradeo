@@ -1,0 +1,16 @@
+{
+    "name": "Demo.sistema-de-tradeo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5b6c0c7e8a209e8439e925d055557929"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
