@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace ItIsNotOnlyMe.SistemaDeTradeo
 {
-    public interface IObjeto 
+
+    public interface IObjeto
     {
-        public IPromesa CrearPromesa();
+        public IValor Valor();
     }
 }

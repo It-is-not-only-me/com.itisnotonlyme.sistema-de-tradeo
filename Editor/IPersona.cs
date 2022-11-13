@@ -2,10 +2,10 @@
 {
     public interface IPersona
     {
-        public void Recibir(IObjeto objeto);
+        public void SaldarDeuda(IDeuda deuda);
 
-        public void Recibir(IPromesa promesa);
+        public void AgregarObjetos(IObjeto objeto);
 
-        public IObjeto Exigir(IPromesa promesa);
+        public IObjeto Exigir(IObjeto objeto);
     }
 }
