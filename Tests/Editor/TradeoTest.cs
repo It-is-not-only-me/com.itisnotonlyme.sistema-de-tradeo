@@ -10,7 +10,7 @@ public class TradeoTest
     public void Test01PersonaSinObjetosNoPuedeSaldarDeuda()
     {
         IValor valor = new ValorPrueba(25);
-        IDeuda deuda = new DeudaPrueba(valor);
+        IDeuda deuda = new Deuda(valor);
 
         IPersona persona = new PersonaQueIntentaPagarPrueba();
 
@@ -23,7 +23,7 @@ public class TradeoTest
     public void Test02PersonaConValorEquivalenteSaldaLaDeuda()
     {
         IValor valor = new ValorPrueba(25);
-        IDeuda deuda = new DeudaPrueba(valor);
+        IDeuda deuda = new Deuda(valor);
 
         IObjeto monedas = new MonedaPrueba(valor);
         IPersona persona = new PersonaQueIntentaPagarPrueba(monedas);
@@ -37,7 +37,7 @@ public class TradeoTest
     public void Test03PersonaConMenosQueLaDeudaNoPuedeSaldarDeuda()
     {
         IValor valor = new ValorPrueba(25);
-        IDeuda deuda = new DeudaPrueba(valor);
+        IDeuda deuda = new Deuda(valor);
 
         IObjeto monedas = new MonedaPrueba(new ValorPrueba(10));
         IPersona persona = new PersonaQueIntentaPagarPrueba(monedas);
@@ -51,11 +51,11 @@ public class TradeoTest
     public void Test04SePuedeUsarLaPromesaDeUnObjetoParaSaldarUnaDeuda()
     {
         IValor valor = new ValorPrueba(25);
-        IDeuda deuda = new DeudaPrueba(valor);
+        IDeuda deuda = new Deuda(valor);
 
         IObjeto monedas = new MonedaPrueba(valor);
         IPersona deudor = new PersonaQueIntentaPagarPrueba(monedas);
-        IPromesa promesa = new PromesaPrueba(monedas, deudor);
+        IPromesa promesa = new Promesa(monedas, deudor);
 
         IPersona persona = new PersonaQueIntentaPagarPrueba(promesa);
 
@@ -71,7 +71,7 @@ public class TradeoTest
         IObjeto monedas = new MonedaPrueba(valor);
         IPersona deudor = new PersonaQueIntentaPagarPrueba(monedas);
 
-        IPromesa promesa = new PromesaPrueba(monedas, deudor);
+        IPromesa promesa = new Promesa(monedas, deudor);
 
         Assert.AreEqual(monedas, promesa.Exigir());
     }

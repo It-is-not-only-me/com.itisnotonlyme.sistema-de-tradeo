@@ -1,4 +1,5 @@
 ﻿using ItIsNotOnlyMe.SistemaDeTradeo;
+using System.Collections.Generic;
 
 public class ValorPrueba : IValor
 {
@@ -9,12 +10,13 @@ public class ValorPrueba : IValor
         _valor = valor;
     }
 
-    public void Disminuir(IValor valor) => Disminuir(valor as ValorPrueba);
+    public bool ValorMayor(IValor valor) => ValorMayor(new List<IValor> { valor });
 
-    public bool Positivo() => _valor > 0;
-
-    private void Disminuir(ValorPrueba valor)
+    public bool ValorMayor(List<IValor> valores)
     {
-        _valor -= valor._valor;
+        float valorTotal = 0;
+        foreach (IValor valor in valores)
+            valorTotal += (valor as ValorPrueba)._valor;
+        return _valor > valorTotal;
     }
 }

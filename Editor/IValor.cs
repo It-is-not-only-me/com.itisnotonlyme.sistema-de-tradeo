@@ -1,9 +1,11 @@
-﻿namespace ItIsNotOnlyMe.SistemaDeTradeo
+﻿using System.Collections.Generic;
+
+namespace ItIsNotOnlyMe.SistemaDeTradeo
 {
     public interface IValor
     {
-        public void Disminuir(IValor valor);
+        public bool ValorMayor(IValor valor);
 
-        public bool Positivo();
+        public bool ValorMayor(List<IValor> valores);
     }
 }
