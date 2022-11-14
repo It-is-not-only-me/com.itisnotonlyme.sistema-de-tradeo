@@ -6,8 +6,8 @@ namespace ItIsNotOnlyMe.SistemaDeTradeo
 {
     public class Promesa : IPromesa
     {
-        private IPersona _deudor;
-        private IObjeto _objetoPrometido;
+        protected IPersona _deudor;
+        protected IObjeto _objetoPrometido;
 
         public Promesa(IObjeto objetoPrometido, IPersona deudor)
         {

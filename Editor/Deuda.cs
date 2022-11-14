@@ -7,7 +7,7 @@ namespace ItIsNotOnlyMe.SistemaDeTradeo
 {
     public class Deuda : IDeuda
     {
-        private IValor _valorASaldar;
+        protected IValor _valorASaldar;
         private Action<IObjeto> _agregaObjeto;
         private List<IValor> _valorAgregado;
 

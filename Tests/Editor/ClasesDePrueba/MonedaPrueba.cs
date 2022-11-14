@@ -1,13 +1,9 @@
 ﻿using ItIsNotOnlyMe.SistemaDeTradeo;
 
-public class MonedaPrueba : IObjeto
+public class MonedaPrueba : Objeto
 {
-    private IValor _valor;
-
     public MonedaPrueba(IValor valor)
+        : base(valor)
     {
-        _valor = valor;
     }
-
-    public IValor Valor() => _valor;
 }

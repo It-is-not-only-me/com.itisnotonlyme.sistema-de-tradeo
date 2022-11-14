@@ -5,17 +5,12 @@ public class PersonaQueIntentaPagarPrueba : IPersona
 {
     private List<IObjeto> _objetos;
 
-    public PersonaQueIntentaPagarPrueba()
-        : this(new List<IObjeto>())
-    {
-    }
-
     public PersonaQueIntentaPagarPrueba(IObjeto objeto)
         : this(new List<IObjeto> { objeto })
     {
     }
 
-    public PersonaQueIntentaPagarPrueba(List<IObjeto> objetos)
+    public PersonaQueIntentaPagarPrueba(List<IObjeto> objetos = null)
     {
         _objetos = (objetos == null) ? new List<IObjeto>() : objetos;
     }
