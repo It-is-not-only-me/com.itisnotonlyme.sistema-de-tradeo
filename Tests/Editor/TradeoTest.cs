@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -7,109 +6,73 @@ using ItIsNotOnlyMe.SistemaDeTradeo;
 
 public class TradeoTest
 {
-    private IPersona _personaBasica = new PersonaPrueba(1);
-
-    private IPromesa _promesaSimple = new PromesaSumaPrueba(2);
-
     [Test]
-    public void Test01NoSePuedeEjecutarIntercambioSiNoHayPersonasParaIntercambiar()
+    public void Test01PersonaSinObjetosNoPuedeSaldarDeuda()
     {
-        IMesa mesa = new Mesa();
+        IValor valor = new ValorPrueba(25);
+        IDeuda deuda = new Deuda(valor);
 
-        Assert.IsFalse(mesa.PermiteEjecutarIntercambio());
+        IPersona persona = new PersonaQueIntentaPagarPrueba();
+
+        persona.SaldarDeuda(deuda);
+
+        Assert.IsFalse(deuda.EstaSaldada());
     }
 
     [Test]
-    public void Test02MesaConUnaZonaNoPermiteEjecutarIntercambio()
+    public void Test02PersonaConValorEquivalenteSaldaLaDeuda()
     {
-        IMesa mesa = new Mesa();
-        IZona zona = new Zona(_personaBasica);
+        IValor valor = new ValorPrueba(25);
+        IDeuda deuda = new Deuda(valor);
 
-        mesa.AgregarZona(zona);
+        IObjeto monedas = new MonedaPrueba(valor);
+        IPersona persona = new PersonaQueIntentaPagarPrueba(monedas);
 
-        Assert.IsFalse(mesa.PermiteEjecutarIntercambio());
+        persona.SaldarDeuda(deuda);
+
+        Assert.IsTrue(deuda.EstaSaldada());
     }
 
     [Test]
-    public void Test03MesaConDosZonasVinculadasPeroNingunoAceptaNoPermiteEjecutrarIntercambio()
+    public void Test03PersonaConMenosQueLaDeudaNoPuedeSaldarDeuda()
     {
-        IMesa mesa = new Mesa();
-        IZona zona1 = new Zona(_personaBasica);
-        IZona zona2 = new Zona(_personaBasica);
+        IValor valor = new ValorPrueba(25);
+        IDeuda deuda = new Deuda(valor);
 
-        zona2.ZonaPropuesta(zona1);
-        zona1.ZonaPropuesta(zona2);
+        IObjeto monedas = new MonedaPrueba(new ValorPrueba(10));
+        IPersona persona = new PersonaQueIntentaPagarPrueba(monedas);
 
-        mesa.AgregarZona(zona1);
-        mesa.AgregarZona(zona2);
+        persona.SaldarDeuda(deuda);
 
-        Assert.IsFalse(mesa.PermiteEjecutarIntercambio());
+        Assert.IsFalse(deuda.EstaSaldada());
     }
 
     [Test]
-    public void Test04MesaConDosZonasVinculadasSoloUnaAceptaNoPermiteEjecutrarIntercambio()
+    public void Test04SePuedeUsarLaPromesaDeUnObjetoParaSaldarUnaDeuda()
     {
-        IMesa mesa = new Mesa();
-        IZona zona1 = new Zona(_personaBasica);
-        IZona zona2 = new Zona(_personaBasica);
+        IValor valor = new ValorPrueba(25);
+        IDeuda deuda = new Deuda(valor);
 
-        zona2.AgregarPromesa(_promesaSimple);
+        IObjeto monedas = new MonedaPrueba(valor);
+        IPersona deudor = new PersonaQueIntentaPagarPrueba(monedas);
+        IPromesa promesa = new Promesa(monedas, deudor);
 
-        zona2.ZonaPropuesta(zona1);
-        zona1.ZonaPropuesta(zona2);
+        IPersona persona = new PersonaQueIntentaPagarPrueba(promesa);
 
-        mesa.AgregarZona(zona1);
-        mesa.AgregarZona(zona2);
+        persona.SaldarDeuda(deuda);
 
-        Assert.IsTrue(zona1.CriterioEvaluacion());
-        Assert.IsFalse(mesa.PermiteEjecutarIntercambio());
+        Assert.IsTrue(deuda.EstaSaldada());
     }
 
     [Test]
-    public void Test05MesaConDosZonasVinculadasLasDosAceptaPermiteEjecutrarIntercambio()
+    public void Test05AUnaPersonaSeLeExigeLoPrometido()
     {
-        IMesa mesa = new Mesa();
-        IZona zona1 = new Zona(_personaBasica);
-        IZona zona2 = new Zona(_personaBasica);
+        IValor valor = new ValorPrueba(25);
+        IObjeto monedas = new MonedaPrueba(valor);
+        IPersona deudor = new PersonaQueIntentaPagarPrueba(monedas);
 
-        zona1.AgregarPromesa(_promesaSimple);
-        zona2.AgregarPromesa(_promesaSimple);
+        IPromesa promesa = new Promesa(monedas, deudor);
 
-        zona2.ZonaPropuesta(zona1);
-        zona1.ZonaPropuesta(zona2);
-
-        mesa.AgregarZona(zona1);
-        mesa.AgregarZona(zona2);
-
-        Assert.IsTrue(mesa.PermiteEjecutarIntercambio());
-    }
-
-    [Test]
-    public void Test06MesaAlEjecutarElIntercambioLasPersonasTienenLoPrometido()
-    {
-        IMesa mesa = new Mesa();
-
-        PersonaPrueba personaBasica1 = new PersonaPrueba(1);
-        PersonaPrueba personaBasica2 = new PersonaPrueba(1);
-
-        IZona zona1 = new Zona(personaBasica1);
-        IZona zona2 = new Zona(personaBasica2);
-
-        int prometidoAPersona1 = 2, prometidoAPersona2 = 4;
-
-        zona1.AgregarPromesa(_promesaSimple);
-        zona1.AgregarPromesa(_promesaSimple);
-        zona2.AgregarPromesa(_promesaSimple);
-
-        zona2.ZonaPropuesta(zona1);
-        zona1.ZonaPropuesta(zona2);
-
-        mesa.AgregarZona(zona1);
-        mesa.AgregarZona(zona2);
-
-        mesa.Intercambiar();
-
-        Assert.AreEqual(prometidoAPersona1, personaBasica1.InteresAcumulado());
-        Assert.AreEqual(prometidoAPersona2, personaBasica2.InteresAcumulado());
+        Assert.AreEqual(monedas, promesa.Exigir());
     }
 }

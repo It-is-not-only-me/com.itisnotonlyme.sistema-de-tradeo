@@ -1,6 +1,6 @@
 {
     "name": "com.itisnotonlyme.sistema-de-tradeo",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "displayName": "Sistema de tradeo",
     "description": "Permite tener un sistema para tradear donde la intencion es tener un intercambio que beneficie los dos",
     "unity": "2020.3",

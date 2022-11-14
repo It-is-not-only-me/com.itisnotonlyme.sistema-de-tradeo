@@ -1,7 +1,7 @@
 ﻿namespace ItIsNotOnlyMe.SistemaDeTradeo
 {
-    public interface IPromesa
+    public interface IPromesa : IObjeto
     {
-
+        public IObjeto Exigir();
     }
 }
